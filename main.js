@@ -163,7 +163,7 @@ function PixelTest()
  for (var i=4000; i>0; i--) // do a whole bunch:
  {
  var x = randomIntInc(XMAX); // random x coordinate
- var y = randomIntInc(XMAX); // random y coordinate
+ var y = randomIntInc(YMAX); // random y coordinate
  DrawPixel(x,y,YELLOW); // draw pixel at x,y
  }
 }

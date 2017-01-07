@@ -120,3 +120,5 @@ function spitest(){
     console.log("Sent: " + buf.toString('hex') + ". Received: " + buf2.toString('hex'));
 }
 
+spitest();
+

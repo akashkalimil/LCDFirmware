@@ -70,7 +70,7 @@ var GPIO8 = new m.Gpio(8); //setup Digital pin #8 (d8) reset
 GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 
 var transfer = new m.Spi(0); //spi bus
-
+transfer.frequency(1000000);  
 
 function randomIntInc (high) {
     return Math.floor(Math.random() * (high  + 1));
@@ -145,7 +145,6 @@ function SetAddrWindow( x0,  y0,  x1,  y1)
 function DrawPixel ( x, y, color)
 {
  SetAddrWindow(x,y,x,y); // set active region = 1 pixel
- WriteCmd(RAMWR); // memory write
  Write565(color,1); // send color for this pixel
 }
 function FillRect ( x0, y0, x1, y1, color)
@@ -153,7 +152,6 @@ function FillRect ( x0, y0, x1, y1, color)
  var width = x1-x0+1; // rectangle width
  var height = y1-y0+1; // rectangle height
  SetAddrWindow(x0,y0,x1,y1); // set active region
- WriteCmd(RAMWR); // memory write
  Write565(color,width*height); // set color data for all pixels
 }
 
@@ -195,13 +193,6 @@ function DrawRect ( x0,  y0,  x1,  y1,  color)
  VLine(x1,y0,y1,color);
 }
 
-function FillRect ( x0,  y0,  x1,  y1, color)
-{
- var width = x1-x0+1;
- var height = y1-y0+1;
- SetAddrWindow(x0,y0,x1,y1);
- Write565(color,width*height);
-}
 
 
 
@@ -212,5 +203,5 @@ initDisplay();
 console.log('done');
 //PixelTest();
 console.log('done');
-FillRect( 0, 0, XMAX,YMAX,RED);
+FillRect( 0, 0, XMAX,YMAX,WHITE);
 FillRect( 0, 0, XMAX,YMAX,RED);

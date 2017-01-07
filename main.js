@@ -47,8 +47,8 @@ function FillCircle (xPos, yPos, radius, color)
 //lcd.drawCircle(100, 110, 10, st7735.ST7735_BLUE);
 //lcd.drawCircle((width/2)-1,(height/2)-1,60,st7735.ST7735_RED);
 //lcd.refresh();
-FillCircle((width/2)+1,(height/2)+1,60,st7735.ST7735_GREEN);
-FillCircle((width/2)+1,(height/2)+1,52,st7735.ST7735_BLACK);
+FillCircle((width/2)-1,(height/2)-1,60,st7735.ST7735_GREEN);
+FillCircle((width/2)-1,(height/2)-1,52,st7735.ST7735_BLACK);
 //lcd.refresh();
 
 function setup_hour(){
@@ -76,7 +76,7 @@ for (var i = 0; i < 360; i += 30) {
     lcd.refresh();*/
 
 setup_hour();
-lcd.refresh();
+
 /*
 lcd.refresh();
 

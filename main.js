@@ -20,7 +20,7 @@ while (y0<= y1){
     
 }
     lcd.refresh();
-    lcd.sdCSOff();
+    lcd.sdCSOn();
 
 }
 fillrectangle(0,0,100,100,st7735.ST7735_RED);

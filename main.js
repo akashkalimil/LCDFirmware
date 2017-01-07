@@ -48,7 +48,9 @@ function FillCircle (xPos, yPos, radius, color)
 //lcd.drawCircle(100, 110, 10, st7735.ST7735_BLUE);
 //lcd.drawCircle((width/2)-1,(height/2)-1,60,st7735.ST7735_RED);
 lcd.refresh();
-FillCircle((width/2)-1,(height/2)-1,20,st7735.ST7735_BLUE);
+FillCircle((width/2)-1,(height/2)-1,118,st7735.ST7735_GREEN);
+FillCircle((width/2)-1,(height/2)-1,110,st7735.ST7735_BLACK);
+
 
 /*
 lcd.refresh();

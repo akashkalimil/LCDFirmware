@@ -26,8 +26,8 @@ while (y0<= y1){
 }
 
 //fillrectangle(0,0,100,100,st7735.ST7735_RED);
-var width = 128;
-var height = 160;
+var height = 128;
+var width = 160;
 
 
 function FillCircle (xPos, yPos, radius, color)
@@ -52,6 +52,7 @@ FillCircle((width/2)-1,(height/2)-1,60,st7735.ST7735_GREEN);
 FillCircle((width/2)-1,(height/2)-1,52,st7735.ST7735_BLACK);
 lcd.refresh();
 
+function setup_hour(){
 for (var i = 0; i < 360; i += 30) {
     var sx = Math.cos((i - 90) * 0.0174532925);
     var sy = Math.sin((i - 90) * 0.0174532925);
@@ -61,8 +62,21 @@ for (var i = 0; i < 360; i += 30) {
     var yy1 = sy * 42 + (height/2)-1;
 
     lcd.drawLine(x0, yy0, x1, yy1, st7735.ST7735_YELLOW);//garis penanda angka jam
+    lcd.refresh();
   }
-lcd.refresh();
+}
+
+for (var i = 0; i < 360; i += 6) {
+    var sx = Math.cos((i - 90) * 0.0174532925);
+    var sy = Math.sin((i - 90) * 0.0174532925);
+    var x0 = sx * 102 + (width/2)-1;
+    var yy0 = sy * 102 + (height/2)-1;
+    // Draw minute markers
+    lcd.drawPixel(x0, yy0, st7735.ST7735_WHITE); //titik penanda menit
+}
+    lcd.refresh();
+
+setup_hour();
 /*
 lcd.refresh();
 

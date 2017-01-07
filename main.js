@@ -66,7 +66,7 @@ for (var i = 0; i < 360; i += 30) {
   }
 }
 
-for (var i = 0; i < 360; i += 6) {
+/*for (var i = 0; i < 360; i += 6) {
     var sx = Math.cos((i - 90) * 0.0174532925);
     var sy = Math.sin((i - 90) * 0.0174532925);
     var x0 = sx * 44 + (width/2)-1;
@@ -74,7 +74,7 @@ for (var i = 0; i < 360; i += 6) {
     // Draw minute markers
     lcd.drawPixel(x0, yy0, st7735.ST7735_WHITE); //titik penanda menit
 }
-    lcd.refresh();
+    lcd.refresh();*/
 
 setup_hour();
 /*

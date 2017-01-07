@@ -70,7 +70,7 @@ var GPIO8 = new m.Gpio(8); //setup Digital pin #8 (d8) reset
 GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 
 var transfer = new m.Spi(0); //spi bus
-transfer.frequency(5000000);  
+transfer.frequency(8000000);  
 
 function randomIntInc (high) {
     return Math.floor(Math.random() * (high  + 1));
@@ -102,6 +102,8 @@ function HardwareReset(){
     GPIO8.write(0); //pulling line temporarily low
     sleep.usleep(1000);// 1 ms delay
     GPIO8.write(1);
+        sleep.usleep(1500);// 1.5 ms delay
+
 }
 
  

@@ -26,7 +26,7 @@ while (y0<= y1){
 //fillrectangle(0,0,100,100,st7735.ST7735_RED);
 var width = 128;
 var height = 160;
-lcd.drawCircle(width/2,height/2,50,st7735.ST7735_RED);
+lcd.drawCircle(width/2,height/2,100,st7735.ST7735_RED);
 /*
 lcd.refresh();
 

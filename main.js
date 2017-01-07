@@ -62,8 +62,9 @@ for (var i = 0; i < 360; i += 30) {
     var yy1 = sy * 42 + (height/2);
 
     lcd.drawLine(x0, yy0, x1, yy1, st7735.ST7735_YELLOW);//garis penanda angka jam
-    lcd.refresh();
   }
+        lcd.refresh();
+
 }
 
 /*for (var i = 0; i < 360; i += 6) {

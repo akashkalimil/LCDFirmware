@@ -106,7 +106,8 @@ function initDisplay(){
 function spitest(){
    buf = new Buffer(1);
     buf[0] = 0x01;
-    transfer.write(buf);
+    buf2 = transfer.write(buf);
+    console.log("Sent: " + buf.toString('hex') + ". Received: " + buf2.toString('hex'))
 }
 
 console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the console

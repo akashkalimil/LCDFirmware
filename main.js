@@ -1,114 +1,213 @@
-var st7735 = require('jsupm_st7735');
-var lcd = new st7735.ST7735(7, 1, 9, 8);
+/*jslint node:true, vars:true, bitwise:true, unparam:true */
+/*jshint unused:true */
+// Leave the above lines for propper jshinting
 
-lcd.fillScreen(st7735.ST7735_RED);
-lcd.refresh();
-lcd.fillScreen(st7735.ST7735_CYAN);
-lcd.refresh();
-
-lcd.fillScreen(st7735.ST7735_BLACK);
-lcd.refresh();
-//128 x 160 display
-//lcd.Circle(64,80,50,st7735.ST7735_RED);
-lcd.refresh();
-function fillrectangle(x0, y0, x1, y1, color){
-         var width = x1 - x0 +1;
-         var height = y1 - y0 +1;
-
-        while (y0<= y1){
-            lcd.drawLine(x0,y0,x1,y0,color);
-            y0+=1;
-
-        }
-
-
-        }
-
-//fillrectangle(0,0,100,100,st7735.ST7735_RED);
-var width = 128;
-var height = 160;
-
-
-function FillCircle (xPos, yPos, radius, color)
-// draws filled circle at x,y with given radius & color
-{
- var r2 = radius * radius;
- for (var x=0; x<=radius; x++)
- {
- var y = Math.sqrt(r2-x*x);
- var y0 = yPos-y;
- var y1 = yPos+y;
- lcd.drawLine(xPos+x,y0,xPos+x,y1,color);
- lcd.drawLine(xPos - x,y0,xPos-x, y1,color);
- }
-    // lcd.refresh();
-   //s lcd.sdCSOn();
-}
-//lcd.drawCircle(100, 110, 10, st7735.ST7735_BLUE);
-//lcd.drawCircle((width/2)-1,(height/2)-1,60,st7735.ST7735_RED);
-//lcd.refresh();
-FillCircle((width/2)-1,(height/2)-1,60,st7735.ST7735_GREEN);
-FillCircle((width/2)-1,(height/2)-1,52,st7735.ST7735_BLACK);
-//lcd.refresh();
-
-function setup_hour(){
-for (var i = 0; i < 360; i += 30) {
-    var sx = Math.cos((i - 90) * 0.0174532925);
-    var sy = Math.sin((i - 90) * 0.0174532925);
-    var x0 = sx * 56 + (width/2)-1;
-    var yy0 = sy * 56 + (height/2)-1;
-    var x1 = sx * 42 + (width/2)-1;
-    var yy1 = sy * 42 + (height/2)-1;
-
-    lcd.drawLine(x0, yy0, x1, yy1, st7735.ST7735_YELLOW);//garis penanda angka jam
-  }
-
-}
-function min_setup(){
-for (var i = 0; i < 360; i += 6) {
-    var sx = Math.cos((i - 90) * 0.0174532925);
-    var sy = Math.sin((i - 90) * 0.0174532925);
-    var x0 = sx * 44 + (width/2)-1;
-    var yy0 = sy * 44 + (height/2)-1;
-    // Draw minute markers
-    lcd.drawLine(x0,yy0,x0, yy0, st7735.ST7735_WHITE); //titik penanda menit
-    
-    if (i === 0 || i == 180) {
-                FillCircle(x0, yy0, 2,st7735.ST7735_WHITE ); }
-    if (i == 90 || i == 270) {
-                FillCircle(x0, yy0, 2,st7735.ST7735_WHITE ); }
-
-    }
-    
- FillCircle((width/2)-1, (height/2)-1, 2,st7735.ST7735_WHITE ); }
-
-
-    
-setup_hour();
-min_setup();
-lcd.refresh();
 /*
-lcd.refresh();
+    The Serial Peripheral Interface (SPI) sample application distributed within Intel® XDK IoT Edition under the IoT with Node.js Projects project creation option showcases how to communicate with SPI devices with Intel(R) IoT platforms such as Intel(R) Edison as the master device.
 
-lcd.drawPixel(20, 20, st7735.ST7735_GREEN);
-lcd.refresh();
+	This sends 4 bytes on MOSI and if connected correctly will yield a 4 buffer object with the result on MISO and print both. Connect MOSI to MISO and input should match the result
+	Acceptable parameters to the SPI constructor depends on the amount of SPI buses & chip selects you have. Mraa considers every chip select on every bus to be represented by a SPI object. But 0 is always the default.
+	SPI pins are 10/11/12 on an Intel(R) Edison Arduino type board.
+		* Pin 10 >> SS
+		* Pin 11 >> MOSI
+		* Pin 12 >> MISO
+		* Pin 13 >> SCK
+	
+    MRAA - Low Level Skeleton Library for Communication on GNU/Linux platforms
+    Library in C/C++ to interface with Galileo & other Intel platforms, in a structured API with port names/numbering that match compatible boards & with bindings to javascript.
 
-lcd.drawTriangle(50, 50, 80, 80, 60, 90, st7735.ST7735_GREEN);
-lcd.refresh();
+    Steps for installing MRAA & UPM Library on Intel IoT Platform with IoTDevKit Linux* image and an active internet connection
+    Using a ssh client: 
+	    1. echo "src maa-upm http://iotdk.intel.com/repos/1.1/intelgalactic" > /etc/opkg/intel-iotdk.conf
+	    2. opkg update
+	    3. opkg upgrade
 
-lcd.drawCircle(100, 110, 10, st7735.ST7735_BLUE);
-lcd.refresh();
+    Article: https://software.intel.com/en-us/node-js-templates-for-intel-xdk-iot-edition
+*/
+//SPI: 10 (SS), 11 (MOSI), 12 (MISO), 13 (SCK)
+// DC 9 
+// reset 8  
 
-lcd.setTextWrap(0x0);
 
-lcd.setCursor(0, 30);
-lcd.setTextColor(st7735.ST7735_RED, st7735.ST7735_RED);
-lcd.setTextSize(1);
-lcd.print('Hello World!');
 
-lcd.setCursor(10, 50);
-lcd.setTextColor(st7735.ST7735_RED, st7735.ST7735_RED);
-lcd.setTextSize(2);
-lcd.print('BIG');
+////gpio init
 
-lcd.refresh();*/
+
+var sleep = require('sleep'); 
+var m = require('mraa'); //require mraa
+
+
+var SWRESET =0x01; // software reset
+var SLPOUT = 0x11; // sleep out
+var DISPOFF = 0x28; // display off
+var DISPON = 0x29; // display on
+var CASET = 0x2A; // column address set
+var RASET = 0x2B; // row address set
+var RAMWR = 0x2C; // RAM write
+var MADCTL = 0x36; // axis control
+var COLMOD = 0x3A; // color mode
+// 1.8" TFT display constants
+var XSIZE = 128;
+var YSIZE =160;
+var XMAX = XSIZE-1;
+var YMAX  = YSIZE-1;
+// Color constants
+var BLACK = 0x0000;
+var BLUE = 0x001F;
+var RED = 0xF800;
+var GREEN = 0x0400;
+var LIME = 0x07E0;
+var CYAN = 0x07FF;
+var MAGENTA = 0xF81F;
+var YELLOW = 0xFFE0;
+var WHITE = 0xFFFF;
+
+
+var GPIO9 = new m.Gpio(9); //setup Digital pin #9 (D9)  DC
+GPIO9.dir(m.DIR_OUT); //set the gpio direction to output
+
+var GPIO8 = new m.Gpio(8); //setup Digital pin #8 (d8) reset
+GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
+
+var transfer = new m.Spi(0); //spi bus
+transfer.frequency(1000000);  
+
+function randomIntInc (high) {
+    return Math.floor(Math.random() * (high  + 1));
+}
+
+
+function WriteData(byte){
+    buf = new Buffer(1);
+    buf[0] = byte;
+    transfer.write(buf);
+}
+
+function WriteWord (w)
+{
+ WriteData(w >> 8); // write upper 8 bits
+ WriteData(w & 0xFF); // write lower 8 bits
+}
+
+function WriteCmd(byte){
+    var buf = new Buffer(1);
+    buf[0] = byte;
+    
+    GPIO9.write(0);
+    transfer.write(buf);
+    GPIO9.write(1);
+}
+
+function HardwareReset(){
+    GPIO8.write(0); //pulling line temporarily low
+    sleep.usleep(1000);// 1 ms delay
+    GPIO8.write(1);
+        sleep.usleep(1500);// 1.5 ms delay
+
+}
+
+ 
+function initDisplay(){
+    HardwareReset(); //initialize display controller
+    WriteCmd(SLPOUT); //take display out of sleep mode
+    sleep.usleep(1500); //150ms delay
+    WriteCmd(COLMOD); // select color mode
+    WriteData(0x05); // mode 5 = 16bit pixels (RGB565)
+    WriteCmd(DISPON); //turn display on
+    
+}
+
+function spitest(){
+   buf = new Buffer(1);
+    buf[0] = 0x01;
+    buf2 = transfer.write(buf);
+    console.log("Sent: " + buf.toString('hex') + ". Received: " + buf2.toString('hex'));
+}
+
+function Write565 ( data, count)
+{
+     WriteCmd(RAMWR);
+        sleep.usleep(1000);// 1 ms delay
+
+ for (;count>0;count--)
+ {
+ WriteData (data >> 8); // write hi byte
+         sleep.usleep(1000);// 1 ms delay
+
+ WriteData (data & 0xFF); // write lo byte
+         sleep.usleep(1000);// 1 ms delay
+
+ }
+}
+function SetAddrWindow( x0,  y0,  x1,  y1)
+{
+ WriteCmd(CASET); // set column range (x0,x1)
+ WriteWord(x0);
+ WriteWord(x1);
+ WriteCmd(RASET); // set row range (y0,y1)
+ WriteWord(y0);
+ WriteWord(y1);
+}
+
+
+function DrawPixel ( x, y, color)
+{
+ SetAddrWindow(x,y,x,y); // set active region = 1 pixel
+ Write565(color,1); // send color for this pixel
+}
+function FillRect ( x0, y0, x1, y1, color)
+{
+ var width = x1-x0+1; // rectangle width
+ var height = y1-y0+1; // rectangle height
+ SetAddrWindow(x0,y0,x1,y1); // set active region
+ Write565(color,width*height); // set color data for all pixels
+}
+
+
+function PixelTest()
+// draws 4000 pixels on the screen
+{
+ for (var i=4000; i>0; i--) // do a whole bunch:
+ {
+ var x = randomIntInc(XMAX); // random x coordinate
+ var y = randomIntInc(YMAX); // random y coordinate
+ DrawPixel(x,y,YELLOW); // draw pixel at x,y
+ }
+}
+
+function HLine (x0, x1, y, color)
+// draws a horizontal line in given color
+{
+ var width = x1-x0+1;
+ SetAddrWindow(x0,y,x1,y);
+ Write565(color,width);
+}
+
+function VLine ( x,  y0, y1, color)
+// draws a vertical line in given color
+{
+ var height = y1-y0+1;
+ SetAddrWindow(x,y0,x,y1);
+ Write565(color,height);
+}
+
+
+function DrawRect ( x0,  y0,  x1,  y1,  color)
+// draws a rectangle in given color
+{
+ HLine(x0,x1,y0,color);
+ HLine(x0,x1,y1,color);
+ VLine(x0,y0,y1,color);
+ VLine(x1,y0,y1,color);
+}
+
+
+
+
+console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the console
+
+initDisplay();
+//spitest();
+console.log('done');
+//PixelTest();
+console.log('done');

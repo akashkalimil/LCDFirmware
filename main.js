@@ -70,7 +70,7 @@ var GPIO8 = new m.Gpio(8); //setup Digital pin #8 (d8) reset
 GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 
 var transfer = new m.Spi(0); //spi bus
-transfer.frequency(8000000);  
+transfer.frequency(8gi000000);  
 
 function randomIntInc (high) {
     return Math.floor(Math.random() * (high  + 1));
@@ -127,10 +127,16 @@ function spitest(){
 function Write565 ( data, count)
 {
      WriteCmd(RAMWR);
+        sleep.usleep(1000);// 1 ms delay
+
  for (;count>0;count--)
  {
  WriteData (data >> 8); // write hi byte
+         sleep.usleep(1000);// 1 ms delay
+
  WriteData (data & 0xFF); // write lo byte
+         sleep.usleep(1000);// 1 ms delay
+
  }
 }
 function SetAddrWindow( x0,  y0,  x1,  y1)

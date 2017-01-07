@@ -49,8 +49,8 @@ var COLMOD = char('0x3A'); // color mode
 // 1.8" TFT display constants
 var XSIZE = 128;
 var YSIZE =160;
-var XMAX = XSIZE-1
-var YMAX  = YSIZE-1
+var XMAX = XSIZE-1;
+var YMAX  = YSIZE-1;
 // Color constants
 var BLACK = char('0x0000');
 var BLUE = char('0x001F');
@@ -66,7 +66,7 @@ var WHITE = char('0xFFFF');
 var GPIO9 = new m.Gpio(9); //setup Digital pin #9 (D9)  DC
 GPIO9.dir(m.DIR_OUT); //set the gpio direction to output
 
-var GPIO8 = new m.Gpio(8) //setup Digital pin #8 (d8) reset
+var GPIO8 = new m.Gpio(8); //setup Digital pin #8 (d8) reset
 GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 
 var transfer = new m.Spi(0); //spi bus
@@ -81,7 +81,7 @@ function WriteCmd(byte){
 function HardwareReset(){
     GPIO8.write(0); //pulling line temporarily low
     sleep.usleep(1000);// 1 ms delay
-    GPI08.write(1);
+    GPIO8.write(1);
 }
 function char(x) { 
 	return parseInt(x, 16); 
@@ -93,7 +93,7 @@ function initDisplay(){
     sleep.usleep(1500); //150ms delay
     WriteCmd(COLMOD);
     transfer.write(char('0x05'));
-    WriteCMD(DISPON);
+    WriteCmd(DISPON);
     
 }
 

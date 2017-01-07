@@ -98,7 +98,7 @@ function HardwareReset(){
     GPIO8.write(0); //pulling line temporarily low
     sleep.usleep(1000);// 1 ms delay
     GPIO8.write(1);
-        sleep.usleep(1500);// 1.5 ms delay
+        sleep.usleep(200000);// 1.5 ms delay
 
 }
 
@@ -106,7 +106,7 @@ function HardwareReset(){
 function initDisplay(){
     HardwareReset(); //initialize display controller
     WriteCmd(SLPOUT); //take display out of sleep mode
-    sleep.usleep(1500); //150ms delay
+    sleep.usleep(150000); //150ms delay
     WriteCmd(COLMOD); // select color mode
     WriteData(0x05); // mode 5 = 16bit pixels (RGB565)
     WriteCmd(DISPON); //turn display on
@@ -121,4 +121,5 @@ function spitest(){
 }
 
 spitest();
+initDisplay();
 

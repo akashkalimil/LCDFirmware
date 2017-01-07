@@ -8,8 +8,8 @@ lcd.refresh();
 
 lcd.fillScreen(st7735.ST7735_BLACK);
 lcd.refresh();
-
-lcd.drawCircle(0,0,100,st7735.ST7735_RED);
+//128 x 160 display
+lcd.drawCircle(64,80,50,st7735.ST7735_RED);
 lcd.refresh();
 function FillCircle ( xPos,  yPos,  radius,  color)
 // draws filled circle at x,y with given radius & color

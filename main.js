@@ -26,8 +26,8 @@ while (y0<= y1){
 }
 
 //fillrectangle(0,0,100,100,st7735.ST7735_RED);
-var height = 128;
-var width = 160;
+var width = 128;
+var height = 160;
 
 
 function FillCircle (xPos, yPos, radius, color)

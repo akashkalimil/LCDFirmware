@@ -100,7 +100,7 @@ function initDisplay(){
     WriteCmd(SLPOUT);
     sleep.usleep(1500); //150ms delay
     WriteCmd(COLMOD);
-    transfer.write(char('0x05'));
+    WriteData(char('0x05'));
     WriteCmd(DISPON);
     
 }

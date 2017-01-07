@@ -105,7 +105,13 @@ function initDisplay(){
     
 }
 
+function spitest(){
+    var x =WriteData(char('0x01'));
+    console.log(x);
+}
+
 console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the console
 
-initDisplay();
+//initDisplay();
+spitest();
 console.log('done');

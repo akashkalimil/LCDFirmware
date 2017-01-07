@@ -150,8 +150,8 @@ function DrawPixel ( x, y, color)
 }
 function FillRect ( x0, y0, x1, y1, color)
 {
- byte width = x1-x0+1; // rectangle width
- byte height = y1-y0+1; // rectangle height
+ var width = x1-x0+1; // rectangle width
+ var height = y1-y0+1; // rectangle height
  SetAddrWindow(x0,y0,x1,y1); // set active region
  WriteCmd(RAMWR); // memory write
  Write565(color,width*height); // set color data for all pixels

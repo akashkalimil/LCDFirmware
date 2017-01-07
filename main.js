@@ -71,8 +71,16 @@ GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 
 var transfer = new m.Spi(0); //spi bus
 
+function WriteData(byte){
+    var buf = new Buffer(1);
+    buf[0] = byte;
+    transfer.write(byte);
+}
 
 function WriteCmd(byte){
+    var buf = new Buffer(1);
+    buf[0] = byte;
+    
     GPIO9.write(0);
     transfer.write(byte);
     GPIO9.write(1);

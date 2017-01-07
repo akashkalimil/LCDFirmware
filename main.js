@@ -16,7 +16,7 @@ function fillrectangle(x0, y0, x1, y1, color){
  var height = y1 - y0 +1;
  
 while (y0<= y1){
-    lcd.drawFastVLine(x0,y0,x1,y0,color);
+    lcd.drawLine(x0,y0,x1,y0,color);
     y0+=1;
     
 }

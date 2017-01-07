@@ -74,7 +74,7 @@ var transfer = new m.Spi(0); //spi bus
 function WriteData(byte){
     var buf = new Buffer(1);
     buf[0] = byte;
-    transfer.write(byte);
+    transfer.write(buf);
 }
 
 function WriteCmd(byte){
@@ -82,7 +82,7 @@ function WriteCmd(byte){
     buf[0] = byte;
     
     GPIO9.write(0);
-    transfer.write(byte);
+    transfer.write(buf);
     GPIO9.write(1);
 }
 

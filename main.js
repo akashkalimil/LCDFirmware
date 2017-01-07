@@ -70,11 +70,7 @@ var GPIO8 = new m.Gpio(8); //setup Digital pin #8 (d8) reset
 GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 
 var transfer = new m.Spi(0); //spi bus
-transfer.frequency(1000000);  
-
-function randomIntInc (high) {
-    return Math.floor(Math.random() * (high  + 1));
-}
+//transfer.frequency(1000000);  
 
 
 function WriteData(byte){
@@ -124,90 +120,3 @@ function spitest(){
     console.log("Sent: " + buf.toString('hex') + ". Received: " + buf2.toString('hex'));
 }
 
-function Write565 ( data, count)
-{
-     WriteCmd(RAMWR);
-        sleep.usleep(1000);// 1 ms delay
-
- for (;count>0;count--)
- {
- WriteData (data >> 8); // write hi byte
-         sleep.usleep(1000);// 1 ms delay
-
- WriteData (data & 0xFF); // write lo byte
-         sleep.usleep(1000);// 1 ms delay
-
- }
-}
-function SetAddrWindow( x0,  y0,  x1,  y1)
-{
- WriteCmd(CASET); // set column range (x0,x1)
- WriteWord(x0);
- WriteWord(x1);
- WriteCmd(RASET); // set row range (y0,y1)
- WriteWord(y0);
- WriteWord(y1);
-}
-
-
-function DrawPixel ( x, y, color)
-{
- SetAddrWindow(x,y,x,y); // set active region = 1 pixel
- Write565(color,1); // send color for this pixel
-}
-function FillRect ( x0, y0, x1, y1, color)
-{
- var width = x1-x0+1; // rectangle width
- var height = y1-y0+1; // rectangle height
- SetAddrWindow(x0,y0,x1,y1); // set active region
- Write565(color,width*height); // set color data for all pixels
-}
-
-
-function PixelTest()
-// draws 4000 pixels on the screen
-{
- for (var i=4000; i>0; i--) // do a whole bunch:
- {
- var x = randomIntInc(XMAX); // random x coordinate
- var y = randomIntInc(YMAX); // random y coordinate
- DrawPixel(x,y,YELLOW); // draw pixel at x,y
- }
-}
-
-function HLine (x0, x1, y, color)
-// draws a horizontal line in given color
-{
- var width = x1-x0+1;
- SetAddrWindow(x0,y,x1,y);
- Write565(color,width);
-}
-
-function VLine ( x,  y0, y1, color)
-// draws a vertical line in given color
-{
- var height = y1-y0+1;
- SetAddrWindow(x,y0,x,y1);
- Write565(color,height);
-}
-
-
-function DrawRect ( x0,  y0,  x1,  y1,  color)
-// draws a rectangle in given color
-{
- HLine(x0,x1,y0,color);
- HLine(x0,x1,y1,color);
- VLine(x0,y0,y1,color);
- VLine(x1,y0,y1,color);
-}
-
-
-
-
-console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the console
-
-initDisplay();
-//spitest();
-console.log('done');
-//PixelTest();
-console.log('done');

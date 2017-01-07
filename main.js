@@ -37,30 +37,30 @@ var sleep = require('sleep');
 var m = require('mraa'); //require mraa
 
 
-var SWRESET =char('0x01'); // software reset
-var SLPOUT = char('0x11'); // sleep out
-var DISPOFF = char('0x28'); // display off
-var DISPON = char('0x29'); // display on
-var CASET = char('0x2A'); // column address set
-var RASET = char('0x2B'); // row address set
-var RAMWR = char('0x2C'); // RAM write
-var MADCTL = char('0x36'); // axis control
-var COLMOD = char('0x3A'); // color mode
+var SWRESET =0x01; // software reset
+var SLPOUT = 0x11; // sleep out
+var DISPOFF = 0x28; // display off
+var DISPON = 0x29; // display on
+var CASET = 0x2A; // column address set
+var RASET = 0x2B; // row address set
+var RAMWR = 0x2C; // RAM write
+var MADCTL = 0x36; // axis control
+var COLMOD = 0x3A; // color mode
 // 1.8" TFT display constants
 var XSIZE = 128;
 var YSIZE =160;
 var XMAX = XSIZE-1;
 var YMAX  = YSIZE-1;
 // Color constants
-var BLACK = char('0x0000');
-var BLUE = char('0x001F');
-var RED = char('0xF800');
-var GREEN = char('0x0400');
-var LIME = char('0x07E0');
-var CYAN = char('0x07FF');
-var MAGENTA = char('0xF81F');
-var YELLOW = char('0xFFE0');
-var WHITE = char('0xFFFF');
+var BLACK = 0x0000;
+var BLUE = 0x001F;
+var RED = 0xF800;
+var GREEN = 0x0400;
+var LIME = 0x07E0;
+var CYAN = 0x07FF;
+var MAGENTA = 0xF81F;
+var YELLOW = 0xFFE0;
+var WHITE = 0xFFFF;
 
 
 var GPIO9 = new m.Gpio(9); //setup Digital pin #9 (D9)  DC
@@ -91,22 +91,20 @@ function HardwareReset(){
     sleep.usleep(1000);// 1 ms delay
     GPIO8.write(1);
 }
-function char(x) { 
-	return parseInt(x, 16); 
-}
+
  
 function initDisplay(){
     HardwareReset();
     WriteCmd(SLPOUT);
     sleep.usleep(1500); //150ms delay
     WriteCmd(COLMOD);
-    WriteData(char('0x05'));
+    WriteData(0x05);
     WriteCmd(DISPON);
     
 }
 
 function spitest(){
-    var x =WriteData(char('0x01'));
+    var x =WriteData(0x01);
     console.log(x);
 }
 

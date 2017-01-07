@@ -24,7 +24,7 @@
 */
 var st7735 = require('jsupm_st7735');
 
-var lcd = new st7735.ST7735(3, 1, 5, 4);
+var lcd = new st7735.ST7735(5, 1, 7, 6);
 lcd.fillScreen(st7735.ST7735_RED);
 lcd.refresh();
 

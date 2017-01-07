@@ -18,7 +18,7 @@ function FillCircle ( xPos,  yPos,  radius,  color)
  var r2 = radius * radius;
  for (var x=0; x<=radius; x++)
  {
- var y = intsqrt(r2-x*x);
+ var y = Math.sqrt(r2-x*x);
  var y0 = yPos-y;
  var y1 = yPos+y;
  lcd.drawLine(xPos+x,y0,y1,color);

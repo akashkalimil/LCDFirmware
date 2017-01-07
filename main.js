@@ -58,7 +58,7 @@ for (var i = 0; i < 360; i += 30) {
     var x0 = sx * 56 + (width/2)-1;
     var yy0 = sy * 56 + (height/2)-1;
     var x1 = sx * 42 + (width/2)-1;
-    var yy1 = sy * 42 + (height/2)-2;
+    var yy1 = sy * 42 + (height/2)-1;
 
     lcd.drawLine(x0, yy0, x1, yy1, st7735.ST7735_YELLOW);//garis penanda angka jam
   }

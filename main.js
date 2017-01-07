@@ -72,7 +72,7 @@ GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 var transfer = new m.Spi(0); //spi bus
 
 function WriteData(byte){
-    var buf = new Buffer(1);
+    buf = new Buffer(1);
     buf[0] = byte;
     transfer.write(buf);
 }
@@ -104,8 +104,9 @@ function initDisplay(){
 }
 
 function spitest(){
-    var x =WriteData(0x01);
-    console.log(x);
+   buf = new Buffer(1);
+    buf[0] = 0x01;
+    transfer.write(buf);
 }
 
 console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the console

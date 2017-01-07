@@ -73,7 +73,7 @@ var GPIO7 = new m.Gpio(7); //setup Digital pin #8 (d8) reset
 GPIO7.dir(m.DIR_OUT); // set the gpio direction to output
 
 var transfer = new m.Spi(0); //spi bus
-transfer.frequency(100000);  
+transfer.frequency(1000000);  
 
 function randomIntInc (high) {
     return Math.floor(Math.random() * (high  + 1));
@@ -88,8 +88,6 @@ function WriteData(byte){
         GPIO7.write(1);
 
 }
-
-
 
 function WriteWord (w)
 {
@@ -138,17 +136,16 @@ function Write565 ( data, count)
 {
      WriteCmd(RAMWR);
         sleep.usleep(1000);// 1 ms delay
-     buf = new Buffer(1000000);
-     var i = 0;
+
  for (;count>0;count--)
  {
-     buf[i] = data >> 8;
-     i= i+1;
-     buf[i] = data & 0xFF;
-     i= i+1;
- }
+ WriteData (data >> 8); // write hi byte
+         sleep.usleep(1000);// 1 ms delay
 
-    transfer.write(buf);
+ WriteData (data & 0xFF); // write lo byte
+         sleep.usleep(1000);// 1 ms delay
+
+ }
 }
 function SetAddrWindow( x0,  y0,  x1,  y1)
 {

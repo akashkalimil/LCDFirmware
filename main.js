@@ -213,3 +213,4 @@ console.log('done');
 //PixelTest();
 console.log('done');
 FillRect( 0, 0, XMAX,YMAX,RED);
+FillRect( 0, 0, XMAX,YMAX,RED);

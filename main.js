@@ -139,8 +139,8 @@ function Write565 ( data, count)
      WriteCmd(RAMWR);
         sleep.usleep(1000);// 1 ms delay
      buf = new Buffer(count);
-
- for (var i = 0;count>0;count--)
+     var i = 0;
+ for (;count>0;count--)
  {
      buf[i] = data >> 8;
      i= i+1;

@@ -60,7 +60,7 @@ for (var i = 0; i < 360; i += 30) {
     var x1 = sx * 42 + (width/2)-1;
     var yy1 = sy * 42 + (height/2)-2;
 
-    tft.drawLine(x0, yy0, x1, yy1, TFT_YELLOW);//garis penanda angka jam
+    lcd.drawLine(x0, yy0, x1, yy1, TFT_YELLOW);//garis penanda angka jam
   }
 lcd.refresh();
 /*

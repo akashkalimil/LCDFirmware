@@ -68,10 +68,8 @@ GPIO9.dir(m.DIR_OUT); //set the gpio direction to output
 
 var GPIO8 = new m.Gpio(8) //setup Digital pin #8 (d8) reset
 GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
-var transfer = new m.Spi(0);
 
-
-GPIO5.write(0); //set the digital pin to high (1)
+var transfer = new m.Spi(0); //spi bus
 
 
 function WriteCmd(byte){
@@ -88,7 +86,7 @@ function HardwareReset(){
 function char(x) { 
 	return parseInt(x, 16); 
 }
-git 
+ 
 function initDisplay(){
     HardwareReset();
     WriteCmd(SLPOUT);

@@ -69,6 +69,9 @@ GPIO9.dir(m.DIR_OUT); //set the gpio direction to output
 var GPIO8 = new m.Gpio(8); //setup Digital pin #8 (d8) reset
 GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 
+var GPIO7 = new m.Gpio(7); //setup Digital pin #8 (d8) reset
+GPIO7.dir(m.DIR_OUT); // set the gpio direction to output
+
 var transfer = new m.Spi(0); //spi bus
 transfer.frequency(8000000);  
 
@@ -80,7 +83,10 @@ function randomIntInc (high) {
 function WriteData(byte){
     buf = new Buffer(1);
     buf[0] = byte;
+    GPIO7.write(0);
     transfer.write(buf);
+        GPIO7.write(1);
+
 }
 
 function WriteWord (w)
@@ -94,8 +100,10 @@ function WriteCmd(byte){
     buf[0] = byte;
     
     GPIO9.write(0);
+    GPIO7.write(0);
     transfer.write(buf);
     GPIO9.write(1);
+    GPIO7.write(1);
 }
 
 function HardwareReset(){

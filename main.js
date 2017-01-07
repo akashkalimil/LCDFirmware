@@ -88,7 +88,6 @@ function WriteWord (w)
  WriteData(w >> 8); // write upper 8 bits
  WriteData(w & 0xFF); // write lower 8 bits
 }
-void
 
 function WriteCmd(byte){
     var buf = new Buffer(1);
@@ -120,7 +119,7 @@ function spitest(){
    buf = new Buffer(1);
     buf[0] = 0x01;
     buf2 = transfer.write(buf);
-    console.log("Sent: " + buf.toString('hex') + ". Received: " + buf2.toString('hex'))
+    console.log("Sent: " + buf.toString('hex') + ". Received: " + buf2.toString('hex'));
 }
 
 function Write565 ( data, count)

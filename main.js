@@ -112,6 +112,6 @@ function spitest(){
 
 console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the console
 
-//initDisplay();
-spitest();
+initDisplay();
+//spitest();
 console.log('done');

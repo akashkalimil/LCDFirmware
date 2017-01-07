@@ -72,6 +72,13 @@ for (var i = 0; i < 360; i += 6) {
     var yy0 = sy * 44 + (height/2)-1;
     // Draw minute markers
     lcd.drawLine(x0,yy0,x0, yy0, st7735.ST7735_WHITE); //titik penanda menit
+    
+    if (i == 0 || i == 180) {
+        lcd.fillCircle(x0, yy0, 2,st7735.ST7735_WHITE ); }
+    if (i == 90 || i == 270) {
+                lcd.fillCircle(x0, yy0, 2,st7735.ST7735_WHITE ); }
+
+    }
 }}
     
 setup_hour();

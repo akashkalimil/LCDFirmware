@@ -47,8 +47,8 @@ var RAMWR = char('0x2C'); // RAM write
 var MADCTL = char('0x36'); // axis control
 var COLMOD = char('0x3A'); // color mode
 // 1.8" TFT display constants
-var XSIZE = 128
-var YSIZE 160
+var XSIZE = 128;
+var YSIZE =160;
 var XMAX = XSIZE-1
 var YMAX  = YSIZE-1
 // Color constants

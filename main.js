@@ -85,6 +85,9 @@ function HardwareReset(){
     sleep.usleep(1000);// 1 ms delay
     GPI08.write(1);
 }
+function char(x) { 
+	return parseInt(x, 16); 
+}
 
 function initDisplay(){
     HardwareReset();

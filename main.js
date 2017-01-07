@@ -23,8 +23,10 @@ while (y0<= y1){
     lcd.sdCSOn();
 
 }
-fillrectangle(0,0,100,100,st7735.ST7735_RED);
-
+//fillrectangle(0,0,100,100,st7735.ST7735_RED);
+var width = 128;
+var height = 160;
+lcd.drawcircle(width/2,height/2,50,st7735.ST7735_RED);
 /*
 lcd.refresh();
 

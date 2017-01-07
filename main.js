@@ -64,10 +64,10 @@ var WHITE = char('0xFFFF');
 
 
 var GPIO9 = new m.Gpio(9); //setup Digital pin #9 (D9)  DC
-GPIO9.dir(mraa.DIR_OUT); //set the gpio direction to output
+GPIO9.dir(m.DIR_OUT); //set the gpio direction to output
 
 var GPIO8 = new m.Gpio(8) //setup Digital pin #8 (d8) reset
-GPIO8.dir(mraa.DIR_OUT); // set the gpio direction to output
+GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 var transfer = new m.Spi(0);
 
 
@@ -88,7 +88,7 @@ function HardwareReset(){
 function char(x) { 
 	return parseInt(x, 16); 
 }
-
+git 
 function initDisplay(){
     HardwareReset();
     WriteCmd(SLPOUT);
@@ -99,7 +99,7 @@ function initDisplay(){
     
 }
 
-console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the console
+console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the console
 
 initDisplay();
 console.log('done');

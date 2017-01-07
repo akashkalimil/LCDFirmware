@@ -8,10 +8,9 @@ lcd.refresh();
 
 lcd.fillScreen(st7735.ST7735_BLACK);
 lcd.refresh();
-lcd.drawLine(10, 10, 10, 100, st7735.ST7735_MAGENTA);
-lcd.drawLine(20, 20, 10, 100, st7735.ST7735_YELLOW);
-lcd.drawLine(30, 30, 10, 100, st7735.ST7735_WHITE);
 
+lcd.drawCircleFilled(0,0,100,st7735.ST7735_RED);
+lcd.refresh();
 function FillCircle ( xPos,  yPos,  radius,  color)
 // draws filled circle at x,y with given radius & color
 {

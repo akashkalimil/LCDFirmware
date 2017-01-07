@@ -168,6 +168,40 @@ function PixelTest()
  }
 }
 
+function HLine (x0, x1, y, color)
+// draws a horizontal line in given color
+{
+ var width = x1-x0+1;
+ SetAddrWindow(x0,y,x1,y);
+ Write565(color,width);
+}
+
+function VLine ( x,  y0, y1, color)
+// draws a vertical line in given color
+{
+ var height = y1-y0+1;
+ SetAddrWindow(x,y0,x,y1);
+ Write565(color,height);
+}
+
+
+function DrawRect ( x0,  y0,  x1,  y1,  color)
+// draws a rectangle in given color
+{
+ HLine(x0,x1,y0,color);
+ HLine(x0,x1,y1,color);
+ VLine(x0,y0,y1,color);
+ VLine(x1,y0,y1,color);
+}
+
+function FillRect ( x0,  y0,  x1,  y1, color)
+{
+ var width = x1-x0+1;
+ var height = y1-y0+1;
+ SetAddrWindow(x0,y0,x1,y1);
+ Write565(color,width*height);
+}
+
 
 
 console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the console
@@ -177,3 +211,4 @@ initDisplay();
 console.log('done');
 PixelTest();
 console.log('done');
+FillRect( 0, 0, XMAX,YMAX,RED);

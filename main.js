@@ -27,7 +27,7 @@ while (y0<= y1){
 var width = 128;
 var height = 160;
 lcd.drawCircle(100, 110, 10, st7735.ST7735_BLUE);
-
+lcd.refresh();
 //lcd.drawCircle(width/2,height/2,100,st7735.ST7735_RED);
 /*
 lcd.refresh();

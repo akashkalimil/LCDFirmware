@@ -52,7 +52,17 @@ FillCircle((width/2)-1,(height/2)-1,60,st7735.ST7735_GREEN);
 FillCircle((width/2)-1,(height/2)-1,52,st7735.ST7735_BLACK);
 lcd.refresh();
 
+for (var i = 0; i < 360; i += 30) {
+    var sx = cos((i - 90) * 0.0174532925);
+    var sy = sin((i - 90) * 0.0174532925);
+    var x0 = sx * 56 + (width/2)-1s;
+    var yy0 = sy * 56 + (height/2)-1;
+    var x1 = sx * 42 + (width/2)-1;
+    var yy1 = sy * 42 + (height/2)-2;
 
+    tft.drawLine(x0, yy0, x1, yy1, TFT_YELLOW);//garis penanda angka jam
+  }
+lcd.refresh();
 /*
 lcd.refresh();
 

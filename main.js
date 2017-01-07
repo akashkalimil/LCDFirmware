@@ -80,9 +80,9 @@ for (var i = 0; i < 360; i += 6) {
 
     }
     
- FillCircle((width/2)-1, (height/2)-1, 2,st7735.ST7735_WHITE ); 
+ FillCircle((width/2)-1, (height/2)-1, 2,st7735.ST7735_WHITE ); }
 
-}
+
     
 setup_hour();
 min_setup();

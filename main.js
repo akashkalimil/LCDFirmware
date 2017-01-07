@@ -9,23 +9,21 @@ lcd.refresh();
 lcd.fillScreen(st7735.ST7735_BLACK);
 lcd.refresh();
 //128 x 160 display
-lcd.drawCircle(64,80,50,st7735.ST7735_RED);
+//lcd.Circle(64,80,50,st7735.ST7735_RED);
 lcd.refresh();
-function FillCircle ( xPos,  yPos,  radius,  color)
-// draws filled circle at x,y with given radius & color
-{
- var r2 = radius * radius;
- for (var x=0; x<=radius; x++)
- {
- var y = Math.sqrt(r2-x*x);
- var y0 = yPos-y;
- var y1 = yPos+y;
- lcd.drawLine(xPos+x,y0,y1,color);
- lcd.drawLine(xPos-x,y0,y1,color);
- }
+function fillrectangle(x0, y0, x1, y1, color){
+ var width = x1 - x0 +1;
+ var height = y1 - y0 +1;
+ 
+while (y0<= y1){
+    lcd.drawFastVLine(x0,y0,x1,y0,color);
+    y0+=1;
+    
+}
     lcd.refresh();
 }
-FillCircle(0,0,100,st7735.magenta);
+fillrectangle(0,0,100,100,st7735.ST7735_RED);
+
 /*
 lcd.refresh();
 

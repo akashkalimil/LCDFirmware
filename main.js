@@ -124,6 +124,7 @@ function spitest(){
 
 function Write565 ( data, count)
 {
+     WriteCmd(RAMWR);
  for (;count>0;count--)
  {
  WriteData (data >> 8); // write hi byte
@@ -209,6 +210,6 @@ console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the 
 initDisplay();
 //spitest();
 console.log('done');
-PixelTest();
+//PixelTest();
 console.log('done');
 FillRect( 0, 0, XMAX,YMAX,RED);

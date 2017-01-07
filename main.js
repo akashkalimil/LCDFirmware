@@ -73,7 +73,7 @@ var GPIO7 = new m.Gpio(7); //setup Digital pin #8 (d8) reset
 GPIO7.dir(m.DIR_OUT); // set the gpio direction to output
 
 var transfer = new m.Spi(0); //spi bus
-transfer.frequency(8000000);  
+transfer.frequency(1000000);  
 
 function randomIntInc (high) {
     return Math.floor(Math.random() * (high  + 1));

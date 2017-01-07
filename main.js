@@ -8,10 +8,26 @@ lcd.refresh();
 
 lcd.fillScreen(st7735.ST7735_BLACK);
 lcd.refresh();
-
 lcd.drawLine(10, 10, 10, 100, st7735.ST7735_MAGENTA);
 lcd.drawLine(20, 20, 10, 100, st7735.ST7735_YELLOW);
 lcd.drawLine(30, 30, 10, 100, st7735.ST7735_WHITE);
+
+function FillCircle ( xPos,  yPos,  radius,  color)
+// draws filled circle at x,y with given radius & color
+{
+ var r2 = radius * radius;
+ for (var x=0; x<=radius; x++)
+ {
+ var y = intsqrt(r2-x*x);
+ var y0 = yPos-y;
+ var y1 = yPos+y;
+ lcd.drawLine(xPos+x,y0,y1,color);
+ lcd.drawLine(xPos-x,y0,y1,color);
+ }
+    lcd.refresh();
+}
+FillCircle(0,0,100,st7735.magenta);
+/*
 lcd.refresh();
 
 lcd.drawPixel(20, 20, st7735.ST7735_GREEN);
@@ -35,4 +51,4 @@ lcd.setTextColor(st7735.ST7735_RED, st7735.ST7735_RED);
 lcd.setTextSize(2);
 lcd.print('BIG');
 
-lcd.refresh();
+lcd.refresh();*/

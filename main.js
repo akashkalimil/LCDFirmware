@@ -71,11 +71,24 @@ GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 
 var transfer = new m.Spi(0); //spi bus
 
+
+function randomIntInc (high) {
+    return Math.floor(Math.random() * (high  + 1));
+}
+
+
 function WriteData(byte){
     buf = new Buffer(1);
     buf[0] = byte;
     transfer.write(buf);
 }
+
+function WriteWord (w)
+{
+ WriteData(w >> 8); // write upper 8 bits
+ WriteData(w & 0xFF); // write lower 8 bits
+}
+void
 
 function WriteCmd(byte){
     var buf = new Buffer(1);
@@ -94,12 +107,12 @@ function HardwareReset(){
 
  
 function initDisplay(){
-    HardwareReset();
-    WriteCmd(SLPOUT);
+    HardwareReset(); //initialize display controller
+    WriteCmd(SLPOUT); //take display out of sleep mode
     sleep.usleep(1500); //150ms delay
-    WriteCmd(COLMOD);
-    WriteData(0x05);
-    WriteCmd(DISPON);
+    WriteCmd(COLMOD); // select color mode
+    WriteData(0x05); // mode 5 = 16bit pixels (RGB565)
+    WriteCmd(DISPON); //turn display on
     
 }
 
@@ -110,8 +123,58 @@ function spitest(){
     console.log("Sent: " + buf.toString('hex') + ". Received: " + buf2.toString('hex'))
 }
 
+function Write565 ( data, count)
+{
+ for (;count>0;count--)
+ {
+ WriteData (data >> 8); // write hi byte
+ WriteData (data & 0xFF); // write lo byte
+ }
+}
+function SetAddrWindow( x0,  y0,  x1,  y1)
+{
+ WriteCmd(CASET); // set column range (x0,x1)
+ WriteWord(x0);
+ WriteWord(x1);
+ WriteCmd(RASET); // set row range (y0,y1)
+ WriteWord(y0);
+ WriteWord(y1);
+}
+
+
+function DrawPixel ( x, y, color)
+{
+ SetAddrWindow(x,y,x,y); // set active region = 1 pixel
+ WriteCmd(RAMWR); // memory write
+ Write565(color,1); // send color for this pixel
+}
+function FillRect ( x0, y0, x1, y1, color)
+{
+ byte width = x1-x0+1; // rectangle width
+ byte height = y1-y0+1; // rectangle height
+ SetAddrWindow(x0,y0,x1,y1); // set active region
+ WriteCmd(RAMWR); // memory write
+ Write565(color,width*height); // set color data for all pixels
+}
+
+
+function PixelTest()
+// draws 4000 pixels on the screen
+{
+ for (var i=4000; i>0; i--) // do a whole bunch:
+ {
+ var x = randomIntInc(XMAX); // random x coordinate
+ var y = randomIntInc(XMAX); // random y coordinate
+ DrawPixel(x,y,YELLOW); // draw pixel at x,y
+ }
+}
+
+
+
 console.log('MRAA Version: ' + m.getVersion()); //write the mraa version to the console
 
 initDisplay();
 //spitest();
+console.log('done');
+PixelTest();
 console.log('done');

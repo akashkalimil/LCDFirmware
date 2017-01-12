@@ -70,7 +70,6 @@ var GPIO8 = new m.Gpio(8); //setup Digital pin #8 (d8) reset
 GPIO8.dir(m.DIR_OUT); // set the gpio direction to output
 
 var transfer = new m.Spi(0); //spi bus
-//transfer.frequency(1000000);  
 
 
 function WriteData(byte){
@@ -110,6 +109,7 @@ function initDisplay(){
     WriteCmd(COLMOD); // select color mode
     WriteData(0x05); // mode 5 = 16bit pixels (RGB565)
     WriteCmd(DISPON); //turn display on
+    console.log("done")
     
 }
 
@@ -121,5 +121,6 @@ function spitest(){
 }
 
 spitest();
+
 initDisplay();
 
